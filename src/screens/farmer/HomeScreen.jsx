@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import BottomTabs from '../../components/layout/BottomTabs';
+import AppTopBar from '../../components/common/AppTopBar';
 import './HomeScreen.css';
 
 export default function Home() {
@@ -8,24 +9,11 @@ export default function Home() {
   return (
     <div className="screen-layout home-container">
       {/* Top App Bar */}
-      <header className="screen-topbar home-header">
-        <div className="home-header-left">
-          <span className="material-symbols-outlined" style={{ cursor: 'pointer' }}>menu</span>
-          <h1 className="home-header-title">NeoKrishiTech</h1>
-        </div>
-        <div className="home-header-right">
-          <div className="home-notification-wrap">
-            <span className="material-symbols-outlined">notifications</span>
-            <span className="home-notification-dot"></span>
-          </div>
-          <div className="home-profile-avatar" onClick={() => navigate('/farmer/profile')}>
-            <img 
-              alt="Profile" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtJrn9EKkcquazanT3bOycXozmultkop2H2rmSgiiDuuqLtB1TmAemeDlDODzMDAAsg4HLp9xsJLYhaXcPDTicpwJIDIdVo0P3fVOQ802EbNeiZdRH_WVVp_zbjPzQPIpx-wstWJyinm5R7Lc34divhYYsm1eJjpdRr-k1BQ4rwRPLmBBCswrdefSQx2bgVyoRU5p1m45sfBYMdAaqleAAHkfuf2yLgyalYU7tNTHNpT2d8ig9V0UDalVW-NrbyyTzXIPvAywC9-A"
-            />
-          </div>
-        </div>
-      </header>
+      <AppTopBar 
+        title="NeoKrishiTech" 
+        showBack={false} 
+        showNotification={true} 
+      />
 
       {/* Main Content Area */}
       <main className="screen-body home-main">

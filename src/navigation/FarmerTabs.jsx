@@ -11,6 +11,9 @@ import WeatherScreen from '../screens/farmer/WeatherScreen';
 import LearningScreen from '../screens/farmer/LearningScreen';
 import SubsidyScreen from '../screens/farmer/SubsidyScreen';
 import AIAssistantScreen from '../screens/farmer/AIAssistantScreen';
+import CartScreen from '../screens/farmer/CartScreen';
+import CheckoutScreen from '../screens/farmer/CheckoutScreen';
+import OrderSuccessScreen from '../screens/farmer/OrderSuccessScreen';
 
 export default function FarmerTabs() {
   return (
@@ -29,6 +32,11 @@ export default function FarmerTabs() {
       <Route path="learning" element={<LearningScreen />} />
       <Route path="subsidy" element={<SubsidyScreen />} />
       <Route path="ai-assistant" element={<AIAssistantScreen />} />
+      
+      {/* E-Commerce screens */}
+      <Route path="cart" element={<CartScreen />} />
+      <Route path="checkout" element={<CheckoutScreen />} />
+      <Route path="order-success" element={<OrderSuccessScreen />} />
     </Routes>
   );
 }

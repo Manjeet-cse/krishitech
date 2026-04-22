@@ -1,12 +1,103 @@
+import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import BottomTabs from '../../components/layout/BottomTabs';
 import AppTopBar from '../../components/common/AppTopBar';
+import { useCart } from '../../store/CartContext';
 import './MarketplaceScreen.css';
 
+const MOCK_PRODUCTS = [
+  // Seeds
+  { id: 1, name: 'Sharbati Wheat Seeds', category: 'Seeds', brand: 'KisanBeej', price: 450, unit: '5kg', rating: 4.8, verified: true, image: '/assets/marketplace/cat_seeds_1776883456036.png' },
+  { id: 2, name: 'Hybrid Tomato Seeds', category: 'Seeds', brand: 'AgriPro', price: 120, unit: '50g', rating: 4.5, verified: true, image: '/assets/marketplace/cat_seeds_1776883456036.png' },
+  { id: 3, name: 'Basmati Rice Seeds', category: 'Seeds', brand: 'KisanBeej', price: 800, unit: '10kg', rating: 4.9, verified: true, image: '/assets/marketplace/cat_seeds_1776883456036.png' },
+  { id: 4, name: 'BT Cotton Seeds', category: 'Seeds', brand: 'Nuziveedu', price: 950, unit: '450g', rating: 4.2, verified: false, image: '/assets/marketplace/cat_seeds_1776883456036.png' },
+  { id: 5, name: 'Yellow Maize Seeds', category: 'Seeds', brand: 'Pioneer', price: 1200, unit: '5kg', rating: 4.6, verified: true, image: '/assets/marketplace/cat_seeds_1776883456036.png' },
+  // Fertilizers
+  { id: 6, name: 'Premium DAP Fertilizer', category: 'Fertilizers', brand: 'IFFCO', price: 1350, unit: '50kg', rating: 4.9, verified: true, image: '/assets/marketplace/cat_fertilizer_1776883473185.png' },
+  { id: 7, name: 'Urea 46% N', category: 'Fertilizers', brand: 'KRIBHCO', price: 266, unit: '45kg', rating: 4.7, verified: true, image: '/assets/marketplace/cat_fertilizer_1776883473185.png' },
+  { id: 8, name: 'MOP - Muriate of Potash', category: 'Fertilizers', brand: 'IPL', price: 1700, unit: '50kg', rating: 4.4, verified: false, image: '/assets/marketplace/cat_fertilizer_1776883473185.png' },
+  { id: 9, name: 'Zinc Sulphate', category: 'Fertilizers', brand: 'Aries', price: 450, unit: '5kg', rating: 4.3, verified: true, image: '/assets/marketplace/cat_fertilizer_1776883473185.png' },
+  { id: 10, name: 'Organic Vermicompost', category: 'Fertilizers', brand: 'EcoFarms', price: 300, unit: '50kg', rating: 4.8, verified: true, image: '/assets/marketplace/cat_fertilizer_1776883473185.png' },
+  // Pesticides
+  { id: 11, name: 'Organic Neem Oil', category: 'Pesticides', brand: 'AgriLife', price: 320, unit: '1L', rating: 4.5, verified: true, image: '/assets/marketplace/cat_pesticide_1776883487387.png' },
+  { id: 12, name: 'Chlorpyrifos 20% EC', category: 'Pesticides', brand: 'Bayer', price: 450, unit: '1L', rating: 4.1, verified: false, image: '/assets/marketplace/cat_pesticide_1776883487387.png' },
+  { id: 13, name: 'Imidacloprid 17.8% SL', category: 'Pesticides', brand: 'Tata Rallis', price: 850, unit: '500ml', rating: 4.6, verified: true, image: '/assets/marketplace/cat_pesticide_1776883487387.png' },
+  { id: 14, name: 'Mancozeb 75% WP Fungicide', category: 'Pesticides', brand: 'UPL', price: 380, unit: '1kg', rating: 4.4, verified: true, image: '/assets/marketplace/cat_pesticide_1776883487387.png' },
+  { id: 15, name: 'Glyphosate 41% SL Herbicide', category: 'Pesticides', brand: 'Excel', price: 600, unit: '1L', rating: 4.3, verified: false, image: '/assets/marketplace/cat_pesticide_1776883487387.png' },
+  // Tools
+  { id: 16, name: 'Heavy Duty Shovel', category: 'Tools', brand: 'Tata Agrico', price: 450, unit: '1 pc', rating: 4.7, verified: true, image: '/assets/marketplace/cat_tools_1776883508076.png' },
+  { id: 17, name: 'Hand Sickle', category: 'Tools', brand: 'Local Forge', price: 150, unit: '1 pc', rating: 3.9, verified: false, image: '/assets/marketplace/cat_tools_1776883508076.png' },
+  { id: 18, name: 'Pruning Shears', category: 'Tools', brand: 'Falcon', price: 550, unit: '1 pc', rating: 4.8, verified: true, image: '/assets/marketplace/cat_tools_1776883508076.png' },
+  { id: 19, name: 'Watering Can 10L', category: 'Tools', brand: 'Plasto', price: 300, unit: '1 pc', rating: 4.2, verified: true, image: '/assets/marketplace/cat_tools_1776883508076.png' },
+  { id: 20, name: 'Wheelbarrow', category: 'Tools', brand: 'Tata Agrico', price: 3200, unit: '1 pc', rating: 4.6, verified: true, image: '/assets/marketplace/cat_tools_1776883508076.png' },
+  // Machinery
+  { id: 21, name: 'Heavy Duty Tiller', category: 'Machinery', brand: 'Honda', price: 45000, unit: '1 unit', rating: 4.9, verified: true, image: '/assets/marketplace/cat_machinery_1776883521697.png' },
+  { id: 22, name: 'Knapsack Sprayer 16L', category: 'Machinery', brand: 'Aspee', price: 2100, unit: '1 unit', rating: 4.5, verified: true, image: '/assets/marketplace/cat_machinery_1776883521697.png' },
+  { id: 23, name: 'Battery Operated Sprayer', category: 'Machinery', brand: 'KisanKraft', price: 3500, unit: '1 unit', rating: 4.7, verified: true, image: '/assets/marketplace/cat_machinery_1776883521697.png' },
+  { id: 24, name: 'Water Pump 5HP', category: 'Machinery', brand: 'Crompton', price: 18500, unit: '1 unit', rating: 4.8, verified: true, image: '/assets/marketplace/cat_machinery_1776883521697.png' },
+  { id: 25, name: 'Chaff Cutter Machine', category: 'Machinery', brand: 'Local', price: 12000, unit: '1 unit', rating: 4.0, verified: false, image: '/assets/marketplace/cat_machinery_1776883521697.png' }
+];
+
+const CATEGORIES = ['All', 'Seeds', 'Fertilizers', 'Pesticides', 'Machinery', 'Tools'];
+
 export default function MarketplaceScreen() {
+  const navigate = useNavigate();
+  const { addToCart, cartCount, cartSubtotal } = useCart();
+  
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [sortBy, setSortBy] = useState('');
+  const [brandFilter, setBrandFilter] = useState('');
+  const [verifiedOnly, setVerifiedOnly] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
+
+  // Extract unique brands for filter
+  const brands = useMemo(() => {
+    return [...new Set(MOCK_PRODUCTS.map(p => p.brand))].sort();
+  }, []);
+
+  const filteredProducts = useMemo(() => {
+    let result = MOCK_PRODUCTS;
+
+    // Search
+    if (searchQuery) {
+      result = result.filter(p => 
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        p.brand.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Category
+    if (activeCategory !== 'All') {
+      result = result.filter(p => p.category === activeCategory);
+    }
+
+    // Verified
+    if (verifiedOnly) {
+      result = result.filter(p => p.verified);
+    }
+
+    // Brand
+    if (brandFilter) {
+      result = result.filter(p => p.brand === brandFilter);
+    }
+
+    // Sort
+    if (sortBy === 'price_asc') {
+      result = result.sort((a, b) => a.price - b.price);
+    } else if (sortBy === 'price_desc') {
+      result = result.sort((a, b) => b.price - a.price);
+    } else if (sortBy === 'rating') {
+      result = result.sort((a, b) => b.rating - a.rating);
+    }
+
+    return result;
+  }, [searchQuery, activeCategory, verifiedOnly, brandFilter, sortBy]);
+
   return (
     <div className="screen-layout" style={{ backgroundColor: 'var(--surface)', position: 'relative' }}>
       
-      <AppTopBar title="Marketplace" showBack={false} showNotification={true} />
+      <AppTopBar title="Marketplace" showBack={false} showNotification={true} showCart={true} />
 
       {/* ── Scrollable Content Area ─────────── */}
       <div className="screen-body">
@@ -17,122 +108,104 @@ export default function MarketplaceScreen() {
             <span className="material-symbols-outlined marketplace-search-icon">search</span>
             <input 
               className="marketplace-search-input" 
-              placeholder="Search seeds, fertilizers..." 
+              placeholder="Search seeds, fertilizers, tools..." 
               type="text" 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <button className="marketplace-mic-btn">
-              <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1", fontSize: '20px' }}>
-                mic
+            <button className="marketplace-filter-btn" onClick={() => setShowFilters(!showFilters)}>
+              <span className="material-symbols-outlined" style={{ fontSize: '20px', color: showFilters ? 'var(--primary)' : 'inherit' }}>
+                tune
               </span>
             </button>
           </div>
 
+          {/* Advanced Filters (Collapsible) */}
+          {showFilters && (
+            <div className="marketplace-advanced-filters">
+              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="market-filter-select">
+                <option value="">Sort By</option>
+                <option value="price_asc">Price: Low to High</option>
+                <option value="price_desc">Price: High to Low</option>
+                <option value="rating">Top Rated (4★+)</option>
+              </select>
+              
+              <select value={brandFilter} onChange={(e) => setBrandFilter(e.target.value)} className="market-filter-select">
+                <option value="">All Brands</option>
+                {brands.map(b => (
+                  <option key={b} value={b}>{b}</option>
+                ))}
+              </select>
+
+              <label className="market-filter-toggle">
+                <input 
+                  type="checkbox" 
+                  checked={verifiedOnly} 
+                  onChange={(e) => setVerifiedOnly(e.target.checked)} 
+                />
+                <span className="material-symbols-outlined verified-icon">verified</span>
+                Verified Only
+              </label>
+            </div>
+          )}
+
           {/* Filter Chips */}
           <div className="marketplace-filters-row hide-scrollbar">
-            <button className="market-chip active">All</button>
-            <button className="market-chip default">Seeds</button>
-            <button className="market-chip default">Fertilizers</button>
-            <button className="market-chip default">Pesticides</button>
-            <button className="market-chip default">Tools</button>
+            {CATEGORIES.map(category => (
+              <button 
+                key={category}
+                className={`market-chip ${activeCategory === category ? 'active' : 'default'}`}
+                onClick={() => setActiveCategory(category)}
+              >
+                {category}
+              </button>
+            ))}
           </div>
 
           {/* Product Grid */}
           <section>
-            <h2 className="product-section-title">Featured Products</h2>
-            <div className="product-grid">
-              
-              {/* Product Card 1 */}
-              <article className="product-card">
-                <div className="product-discount-badge">15% Off</div>
-                <div className="product-img-wrap">
-                  <img 
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1ss8MLmXd1A0r3r0I_zeSKXao2eo5qXQb-4I6BUvynW62e3IRhx5eFZAwtQMWgy49wzZQtl5S88PEJ6czBRZqHqGV8hJEzwfoIWkiXLjSRtLH09w70FVjs9cK7mp03voRuz-N3v2iRNtsTYOU1kPYMlZuyaZPCB14tAeu5xz6LqnwZ3aVOoY_aZB592fo1TAHePgGV1HFrEeixa0U5tZtMMuc7HSyrqZdtqBePW658t3l4VzHGnEi8JokrsOQbF9Yb65kB0kf-o4" 
-                    alt="Sharbati Wheat Seeds" 
-                    className="product-img" 
-                  />
-                </div>
-                <div className="product-info">
-                  <h3 className="product-title">Sharbati Wheat Seeds</h3>
-                  <p className="product-subtitle">High Yield, 5kg</p>
-                  <div className="product-actions">
-                    <span className="product-price">₹450</span>
-                    <button className="product-add-btn">
-                      <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>add</span>
-                    </button>
-                  </div>
-                </div>
-              </article>
-
-              {/* Product Card 2 */}
-              <article className="product-card">
-                <div className="product-img-wrap">
-                  <img 
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYmvvlYerAW49UTW4fsp2638VJjySWtxknbkwBUivYfZEzba9AzNZcYrl6iEIDYvHBmqYa81Bg7zEwybD6w66OJZsAOaV10sRJR2XkqOVEfY8IvEhxtV8OKxLhfMZq9r8wIfkrC1Y0OBUWxLvv1mM_q9Wloj2lMhOunpLat_7MEoJfK2gTVvQt34q23M6uUqQZ9MTxSuwIqCFtz0ZN-9ecTg9zZysSnQGYei2IOPdZmePkl1OVX7oOAro2VDnQQk6mMX81Uk0PN3Q" 
-                    alt="Premium DAP Fertilizer" 
-                    className="product-img" 
-                  />
-                </div>
-                <div className="product-info">
-                  <h3 className="product-title">Premium DAP Fertilizer</h3>
-                  <p className="product-subtitle">N-P-K 18-46-0, 50kg</p>
-                  <div className="product-actions">
-                    <span className="product-price">₹1,350</span>
-                    <div className="product-qty-ctrl">
-                      <button className="product-qty-btn">
-                        <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>remove</span>
-                      </button>
-                      <span className="product-qty">1</span>
-                      <button className="product-qty-btn">
-                        <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>add</span>
-                      </button>
+            {filteredProducts.length === 0 ? (
+              <div className="empty-state">
+                <span className="material-symbols-outlined empty-icon">inventory_2</span>
+                <h3>No products found</h3>
+                <p>Try adjusting your search or filters.</p>
+              </div>
+            ) : (
+              <div className="product-grid">
+                {filteredProducts.map(product => (
+                  <article key={product.id} className="product-card">
+                    {product.verified && (
+                      <div className="product-verified-badge">
+                        <span className="material-symbols-outlined">verified</span>
+                      </div>
+                    )}
+                    <div className="product-img-wrap">
+                      <img 
+                        src={product.image} 
+                        alt={product.name} 
+                        className="product-img" 
+                      />
                     </div>
-                  </div>
-                </div>
-              </article>
-
-              {/* Product Card 3 */}
-              <article className="product-card">
-                <div className="product-img-wrap">
-                  <img 
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuABBTyeYxp2pwQV9XU89T3NaEXLVvhY9_EAy-2Q2AI1kiIZDDeCbkBN5Jr5WtZKjJpDguaXIu7NqzXyUTEFYT2e1u8-wRhN7Hj04yHhf_o8oaM11dnZUCXV8vnf1Ha9OTwZckRChWNz0lmsk2MMSuzk3kwCO8Li8sUZSvF8zewTtaiLUq94n8BcqpYYMpmFktL2a2fDK7ac1orlAorWlp5WJSHEDvqwe9iLWX5RPqUYizwYXb80G894v6PzidWwnhdM4drzrJ3r7ww" 
-                    alt="Organic Neem Oil" 
-                    className="product-img" 
-                  />
-                </div>
-                <div className="product-info">
-                  <h3 className="product-title">Organic Neem Oil</h3>
-                  <p className="product-subtitle">Bio-Pesticide, 1L</p>
-                  <div className="product-actions">
-                    <span className="product-price">₹320</span>
-                    <button className="product-add-btn">
-                      <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>add</span>
-                    </button>
-                  </div>
-                </div>
-              </article>
-
-              {/* Product Card 4 */}
-              <article className="product-card">
-                <div className="product-img-wrap">
-                  <img 
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC2NLLMGTRHRytYIJ1EqcCFAziuEboBHPxe6zV2lZYgmNkKEVexqPhRUppbdkytq6QpZci7_41fLRIjyj1R3FPlVqLTnaH1KltEw3zmIJeBfyTp6xurqmVH3JiefPs4kRAq3cKutj_F6Wwcy6WcD5uoh_u2tt8wV631fOHFGkhhSVEE9xNNKNukFg96tVHH_uhJmiQ4B8AmLAQ7QbtBsDLouLQJoKw_1DKpJIi9N04Af30QYK2bNqNamWTEpqiiB3zfY-i9Uc7wn0" 
-                    alt="Heavy Duty Tiller" 
-                    className="product-img" 
-                  />
-                </div>
-                <div className="product-info">
-                  <h3 className="product-title">Heavy Duty Tiller</h3>
-                  <p className="product-subtitle">Attachment, Steel</p>
-                  <div className="product-actions">
-                    <span className="product-price">₹4,500</span>
-                    <button className="product-add-btn">
-                      <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>add</span>
-                    </button>
-                  </div>
-                </div>
-              </article>
-
-            </div>
+                    <div className="product-info">
+                      <div className="product-brand-rating">
+                        <span className="product-brand">{product.brand}</span>
+                        <span className="product-rating">
+                          {product.rating} <span className="material-symbols-outlined star-icon">star</span>
+                        </span>
+                      </div>
+                      <h3 className="product-title">{product.name}</h3>
+                      <p className="product-subtitle">{product.unit}</p>
+                      <div className="product-actions">
+                        <span className="product-price">₹{product.price.toLocaleString()}</span>
+                        <button className="product-add-btn" onClick={() => addToCart(product)}>
+                          Add +
+                        </button>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
           </section>
 
         </main>
@@ -140,21 +213,21 @@ export default function MarketplaceScreen() {
 
       {/* Floating Elements Area */}
       
-      {/* Sticky Checkout Bar */}
-      <div className="sticky-checkout-wrap">
-        <div className="checkout-bar">
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span className="checkout-total-val">₹1,350</span>
-            <span className="checkout-items">1 item in cart</span>
+      {/* Context-Aware Sticky Checkout Bar */}
+      {cartCount > 0 && (
+        <div className="sticky-checkout-wrap">
+          <div className="checkout-bar" onClick={() => navigate('/farmer/cart')}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <span className="checkout-total-val">₹{cartSubtotal.toLocaleString()}</span>
+              <span className="checkout-items">{cartCount} item{cartCount > 1 ? 's' : ''} in cart</span>
+            </div>
+            <button className="checkout-btn">
+              View Cart
+              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
+            </button>
           </div>
-          <button className="checkout-btn">
-            Checkout
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
-          </button>
         </div>
-      </div>
-
-      {/* Floating Elements Area (AI Button omitted in favor of global AppNavigator FAB) */}
+      )}
 
       {/* ── Bottom Nav ──────────────────────── */}
       <div className="screen-bottomnav">

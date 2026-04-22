@@ -1,7 +1,12 @@
 import AppNavigator from './navigation/AppNavigator';
+import { CartProvider } from './store/CartContext';
 
 function App() {
-  return <AppNavigator />;
+  return (
+    <CartProvider>
+      <AppNavigator />
+    </CartProvider>
+  );
 }
 
 export default App;
