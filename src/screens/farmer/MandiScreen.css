@@ -134,9 +134,7 @@
   overflow-x: auto;
   gap: 12px;
   padding-bottom: 8px;
-  margin: 0 -16px 16px;
-  padding-left: 16px;
-  padding-right: 16px;
+  margin: 0 0 16px;
   scroll-snap-type: x mandatory;
 }
 
@@ -169,7 +167,6 @@
   background-color: var(--surface-container-high);
 }
 
-/* Crop Prices List */
 .crop-prices-list {
   display: flex;
   flex-direction: column;
@@ -177,7 +174,15 @@
   margin-bottom: 32px;
 }
 
-.crop-card {
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--on-surface-variant);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+}
+
+.mandi-crop-card {
   background-color: var(--surface-container-lowest);
   border: 1px solid rgba(191, 202, 186, 0.2);
   border-radius: 16px;
@@ -190,18 +195,18 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
-.crop-card:hover {
+.mandi-crop-card:hover {
   background-color: var(--surface-container-low);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.crop-card-left {
+.mandi-crop-left {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.crop-img-wrap {
+.mandi-crop-img-wrap {
   width: 48px;
   height: 48px;
   border-radius: 9999px;
@@ -211,9 +216,10 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  flex-shrink: 0;
 }
 
-.crop-img {
+.mandi-crop-img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -223,7 +229,7 @@
   mix-blend-mode: multiply;
 }
 
-.crop-title {
+.mandi-crop-title {
   font-family: var(--font-headline);
   font-weight: 700;
   font-size: 1rem;
@@ -231,30 +237,31 @@
   margin-bottom: 2px;
 }
 
-.crop-subtitle {
+.mandi-crop-subtitle {
   font-family: var(--font-body);
   font-size: 0.8125rem;
   color: var(--on-surface-variant);
 }
 
-.crop-card-right {
+.mandi-crop-right {
   text-align: right;
+  flex-shrink: 0;
 }
 
-.crop-price {
+.mandi-crop-price {
   font-family: var(--font-headline);
   font-weight: 700;
   font-size: 1.125rem;
   color: var(--on-surface);
 }
 
-.crop-unit {
+.mandi-crop-unit {
   font-size: 0.75rem;
   font-weight: 400;
   color: var(--on-surface-variant);
 }
 
-.crop-trend {
+.mandi-crop-trend {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -264,20 +271,20 @@
   margin-top: 4px;
 }
 
-.crop-trend .material-symbols-outlined {
+.mandi-crop-trend .material-symbols-outlined {
   font-size: 14px;
   margin-right: 2px;
 }
 
-.trend-up {
+.mandi-crop-trend.trend-up {
   color: var(--primary);
 }
 
-.trend-down {
+.mandi-crop-trend.trend-down {
   color: var(--error);
 }
 
-.trend-neutral {
+.mandi-crop-trend.trend-neutral {
   color: var(--on-surface-variant);
 }
 

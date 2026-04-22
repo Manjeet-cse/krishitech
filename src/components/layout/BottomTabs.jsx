@@ -1,4 +1,4 @@
-import { Home, Stethoscope, Users, Building2, LayoutGrid } from 'lucide-react';
+import { Home, Stethoscope, Users, BookOpen, ShoppingCart } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './BottomTabs.css';
 
@@ -10,8 +10,8 @@ export default function BottomNav() {
     { name: 'Home', path: '/farmer/home', icon: Home },
     { name: 'Diagnosis', path: '/farmer/diagnosis', icon: Stethoscope },
     { name: 'Experts', path: '/farmer/experts', icon: Users },
-    { name: 'Mandi', path: '/farmer/mandi', icon: Building2 },
-    { name: 'More', path: '/farmer/more', icon: LayoutGrid },
+    { name: 'Learning', path: '/farmer/learning', icon: BookOpen },
+    { name: 'Marketplace', path: '/farmer/marketplace', icon: ShoppingCart },
   ];
 
   return (
