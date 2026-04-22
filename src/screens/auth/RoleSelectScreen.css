@@ -1,0 +1,234 @@
+/* ═══════════════════════════════════════════
+   ROLE SELECT SCREEN
+   ═══════════════════════════════════════════ */
+
+.role-screen {
+  background-color: #ffffff;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.role-screen::-webkit-scrollbar {
+  display: none;
+}
+
+.role-screen-inner {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 24px 24px 32px;
+  min-height: 100%;
+}
+
+/* ── Brand Header ──────────────────────── */
+.role-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 28px;
+  margin-top: 8px;
+}
+
+.role-logo-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 9999px;
+  background-color: #e5f9e2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.role-logo-circle .material-symbols-outlined {
+  font-size: 36px;
+  color: #0d631b;
+}
+
+.role-brand-name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  color: #0d631b;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.role-brand-tagline {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  color: #40493d;
+  margin-top: 4px;
+}
+
+/* ── Question ──────────────────────────── */
+.role-question {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.role-question h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: #0f1f11;
+  margin: 0 0 6px;
+}
+
+.role-question p {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 13px;
+  color: #40493d;
+  margin: 0;
+}
+
+/* ── Role Tiles ────────────────────────── */
+.role-tiles {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: auto;
+}
+
+.role-tile {
+  width: 100%;
+  text-align: left;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+  background-color: #f5faf4;
+  cursor: pointer;
+}
+
+.role-tile.active {
+  background-color: #e5f9e2;
+  border-color: #0d631b;
+}
+
+.role-tile:hover:not(.active) {
+  background-color: #edf7ec;
+}
+
+.role-tile-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.role-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  background-color: #d4e8d1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #40493d;
+  flex-shrink: 0;
+}
+
+.role-tile.active .role-icon-box {
+  background-color: #2e7d32;
+  color: #ffffff;
+}
+
+.role-tile-info h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #0f1f11;
+  margin: 0;
+}
+
+.role-tile.active .role-tile-info h3 {
+  font-weight: 700;
+}
+
+.role-tile-info p {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 12px;
+  color: #40493d;
+  margin: 2px 0 0;
+}
+
+.role-checkbox {
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  border: 2px solid #bfcaba;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.role-tile.active .role-checkbox {
+  background-color: #0d631b;
+  border-color: #0d631b;
+  color: #ffffff;
+}
+
+/* ── Bottom Actions ────────────────────── */
+.role-bottom-actions {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 8px;
+}
+
+.btn-continue {
+  width: 100%;
+  height: 56px;
+  border-radius: 28px;
+  background: linear-gradient(to bottom, #0d631b, #2e7d32);
+  color: #ffffff;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px -8px rgba(13, 99, 27, 0.4);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-continue:active {
+  transform: scale(0.97);
+}
+
+.btn-floating-ai {
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 9999px;
+  background-color: #ffb957;
+  color: #2a1800;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(119, 76, 0, 0.15);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-floating-ai:hover {
+  background-color: #ffddb5;
+}

@@ -1,0 +1,375 @@
+/* /src/screens/farmer/MandiScreen.css */
+
+.mandi-appbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 0 16px;
+  background-color: var(--primary-container);
+  color: var(--on-primary);
+}
+
+.mandi-appbar-title {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 1.125rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.mandi-appbar-icon-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--on-primary);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mandi-appbar-icon-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Sub-bar (Location & Time) */
+.mandi-subbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  margin-bottom: 16px;
+}
+
+.mandi-location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.mandi-location .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.mandi-location-text {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.mandi-updated {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--on-surface-variant);
+  font-size: 0.8125rem;
+  font-family: var(--font-body);
+}
+
+/* Search Bar */
+.mandi-search-wrap {
+  position: relative;
+  background-color: var(--surface-container-high);
+  border-radius: 16px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  margin-bottom: 16px;
+  transition: box-shadow 0.2s;
+}
+
+.mandi-search-wrap:focus-within {
+  box-shadow: 0 0 0 2px var(--primary);
+}
+
+.mandi-search-icon {
+  color: var(--outline);
+  margin-right: 12px;
+}
+
+.mandi-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--on-surface);
+}
+
+.mandi-search-input::placeholder {
+  color: var(--on-surface-variant);
+}
+
+.mandi-mic-btn {
+  background-color: var(--surface);
+  color: var(--tertiary);
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(15, 31, 17, 0.06);
+  margin-left: 8px;
+  transition: background-color 0.2s;
+}
+
+.mandi-mic-btn:hover {
+  background-color: var(--surface-container-low);
+}
+
+/* Filter Chips */
+.mandi-filters-row {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  padding-bottom: 8px;
+  margin: 0 -16px 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  scroll-snap-type: x mandatory;
+}
+
+.mandi-chip {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  white-space: nowrap;
+  padding: 8px 20px;
+  border-radius: 9999px;
+  font-family: var(--font-label);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.mandi-chip.active {
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.mandi-chip.default {
+  background-color: var(--surface-container);
+  color: var(--on-surface-variant);
+  border-color: rgba(191, 202, 186, 0.3);
+}
+
+.mandi-chip.default:hover {
+  background-color: var(--surface-container-high);
+}
+
+/* Crop Prices List */
+.crop-prices-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.crop-card {
+  background-color: var(--surface-container-lowest);
+  border: 1px solid rgba(191, 202, 186, 0.2);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.crop-card:hover {
+  background-color: var(--surface-container-low);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.crop-card-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.crop-img-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  background-color: var(--surface-container-highest);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.crop-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+  mix-blend-mode: multiply;
+}
+
+.crop-title {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--on-surface);
+  margin-bottom: 2px;
+}
+
+.crop-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--on-surface-variant);
+}
+
+.crop-card-right {
+  text-align: right;
+}
+
+.crop-price {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--on-surface);
+}
+
+.crop-unit {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--on-surface-variant);
+}
+
+.crop-trend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  margin-top: 4px;
+}
+
+.crop-trend .material-symbols-outlined {
+  font-size: 14px;
+  margin-right: 2px;
+}
+
+.trend-up {
+  color: var(--primary);
+}
+
+.trend-down {
+  color: var(--error);
+}
+
+.trend-neutral {
+  color: var(--on-surface-variant);
+}
+
+/* Voice Query Card */
+.voice-query-card {
+  background: linear-gradient(135deg, var(--surface-container-low), var(--surface-container-highest));
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(15, 31, 17, 0.04);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.voice-query-decor {
+  position: absolute;
+  top: -32px;
+  right: -32px;
+  width: 128px;
+  height: 128px;
+  background-color: var(--primary);
+  opacity: 0.05;
+  border-radius: 9999px;
+  filter: blur(24px);
+  pointer-events: none;
+}
+
+.voice-query-title {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--on-surface);
+  margin-bottom: 8px;
+}
+
+.voice-query-desc {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--on-surface-variant);
+  max-width: 260px;
+  margin: 0 auto 24px;
+  line-height: 1.4;
+}
+
+.voice-query-btn {
+  background-color: var(--tertiary);
+  color: var(--surface-container-lowest);
+  height: 48px;
+  padding: 0 32px;
+  border-radius: 9999px;
+  font-family: var(--font-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(249, 168, 37, 0.25);
+  transition: all 0.2s;
+}
+
+.voice-query-btn:hover {
+  background-color: var(--tertiary-container);
+  color: #fff;
+}
+
+/* Floating AI Button */
+.mandi-fab {
+  position: fixed;
+  bottom: 96px; /* above bottom navigation */
+  right: 16px;
+  z-index: 45;
+  width: 56px;
+  height: 56px;
+  background-color: var(--tertiary);
+  color: var(--surface-container-lowest);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(249, 168, 37, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.mandi-fab:hover {
+  transform: scale(1.05);
+}

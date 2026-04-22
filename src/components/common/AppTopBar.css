@@ -1,0 +1,72 @@
+/* ═══════════════════════════════════════════
+   APP TOP BAR  — shared green header
+   ═══════════════════════════════════════════ */
+
+.app-topbar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 8px;
+  background-color: #2e7d32;   /* primary-container / matches status bar */
+  position: relative;
+  z-index: 40;
+}
+
+/* Left / Right slot — fixed width so title is always centred */
+.app-topbar-left,
+.app-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 48px;
+}
+
+.app-topbar-right {
+  justify-content: flex-end;
+}
+
+/* Spacer used when no icon is shown on that side */
+.app-topbar-spacer {
+  width: 40px;
+  height: 40px;
+}
+
+/* Icon buttons */
+.app-topbar-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.app-topbar-icon-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.app-topbar-icon-btn .material-symbols-outlined {
+  font-size: 24px;
+}
+
+/* Title */
+.app-topbar-title {
+  flex: 1;
+  text-align: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  padding: 0 8px;
+}

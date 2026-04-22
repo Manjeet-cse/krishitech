@@ -1,0 +1,442 @@
+/* ═══════════════════════════════════════════════
+   NEOKRISHI AI ASSISTANT  (nk-ai-*)
+   Precise JSX conversion of the reference HTML.
+   Layout: flex column, 100% height, no scroll on root.
+   ═══════════════════════════════════════════════ */
+
+/* Root — fills the phone-screen slot completely */
+.nk-ai-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background-color: #ffffff; /* surface-container-lowest */
+}
+
+/* ── Header ────────────────────────────────────── */
+.nk-ai-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.nk-ai-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nk-ai-avatar-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #2e7d32; /* primary-container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+.nk-ai-avatar-symbol {
+  font-size: 20px;
+  color: #cbffc2; /* on-primary-container */
+  font-variation-settings: 'FILL' 1;
+}
+
+.nk-ai-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.25;
+  color: #0f1f11; /* on-surface */
+  margin: 0;
+}
+
+.nk-ai-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #0d631b; /* primary */
+  margin: 0;
+}
+
+.nk-ai-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #006e1c; /* secondary */
+  display: block;
+}
+
+.nk-ai-close-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #40493d; /* on-surface-variant */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.nk-ai-close-btn:hover {
+  background-color: #e5f9e2; /* surface-container-low */
+}
+
+.nk-ai-header-divider {
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(191,202,186,0.3), transparent);
+}
+
+/* ── Chat Canvas ───────────────────────────────── */
+.nk-ai-chat {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px;
+  padding-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.nk-ai-chat::-webkit-scrollbar {
+  display: none;
+}
+
+/* AI message row */
+.nk-ai-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 91.666%;
+  max-width: 42rem;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: nkFadeUp 0.35s ease forwards;
+}
+
+/* User message row */
+.nk-user-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  width: 91.666%;
+  max-width: 42rem;
+  align-self: flex-end;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: nkFadeUp 0.35s ease forwards;
+}
+
+@keyframes nkFadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Bot avatar circle */
+.nk-ai-bot-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #2e7d32;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+.nk-ai-bot-symbol {
+  font-size: 14px;
+  color: #cbffc2;
+  font-variation-settings: 'FILL' 1;
+}
+
+/* AI speech bubble */
+.nk-ai-bubble {
+  background-color: #e5f9e2; /* surface-container-low */
+  padding: 16px;
+  border-radius: 16px 16px 16px 4px;
+  font-size: 14px;
+  color: #0f1f11;
+  box-shadow: 0 2px 12px rgba(15,31,17,0.03);
+  line-height: 1.65;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.nk-ai-bubble--wide {
+  width: 100%;
+}
+
+.nk-ai-bubble-text {
+  margin: 0;
+  color: #0f1f11;
+}
+
+.nk-ai-price {
+  color: #0d631b;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+/* User speech bubble */
+.nk-user-bubble {
+  background-color: #2e7d32; /* primary-container */
+  color: #cbffc2; /* on-primary-container */
+  padding: 16px;
+  border-radius: 16px 16px 4px 16px;
+  font-size: 14px;
+  box-shadow: 0 2px 12px rgba(15,31,17,0.06);
+  line-height: 1.65;
+}
+
+/* ── Chart Card ───────────────────────────────── */
+.nk-chart-card {
+  background-color: rgba(212, 232, 209, 0.5); /* surface-container-highest / 50% */
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.nk-chart-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #40493d;
+  margin: 0 0 12px;
+}
+
+.nk-chart-icon {
+  font-size: 14px;
+}
+
+.nk-chart-bars {
+  height: 96px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 4px;
+}
+
+.nk-bar {
+  flex: 1;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  transition: background-color 0.2s;
+}
+
+.nk-bar--normal {
+  background-color: #a3f69c; /* primary-fixed */
+}
+
+.nk-bar--normal:hover {
+  background-color: #0d631b;
+}
+
+.nk-bar--today {
+  background-color: #0d631b; /* primary */
+  display: flex;
+  justify-content: center;
+}
+
+.nk-bar-tooltip {
+  position: absolute;
+  top: -24px;
+  background-color: #ebffe7; /* surface */
+  color: #0d631b;
+  font-weight: 700;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  white-space: nowrap;
+}
+
+.nk-chart-xaxis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 9px;
+  color: rgba(64,73,61,0.8);
+  padding: 0 4px;
+  font-weight: 500;
+}
+
+/* ── Bottom Input Area ────────────────────────── */
+.nk-ai-input-area {
+  flex-shrink: 0;
+  background-color: #ffffff;
+  padding: 8px 16px 20px;
+  box-shadow: 0 -8px 32px rgba(15,31,17,0.04);
+  z-index: 20;
+  position: relative;
+}
+
+/* Gradient fade from chat into input */
+.nk-ai-input-fade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 16px;
+  transform: translateY(-100%);
+  background: linear-gradient(to top, #ffffff, transparent);
+  pointer-events: none;
+}
+
+/* Mode Pills row */
+.nk-mode-pills {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.nk-pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #daeed6; /* surface-container-high */
+  color: #0f1f11;
+  transition: background-color 0.2s;
+}
+
+.nk-pill:hover {
+  background-color: #d4e8d1;
+}
+
+.nk-pill--active {
+  background-color: #0d631b; /* primary */
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(13,99,27,0.25);
+}
+
+.nk-pill-icon {
+  font-size: 14px;
+}
+
+/* Input + Mic row */
+.nk-input-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.nk-text-input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background-color: #daeed6; /* surface-container-high */
+  border-radius: 28px;
+  padding: 4px;
+  min-height: 56px;
+  box-shadow: 0 2px 12px rgba(15,31,17,0.04);
+}
+
+.nk-input-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #40493d;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.nk-input-btn:first-child {
+  margin-left: 4px;
+}
+
+.nk-input-btn:last-child {
+  margin-right: 4px;
+}
+
+.nk-input-btn:hover {
+  color: #0d631b;
+  background-color: #d4e8d1;
+}
+
+.nk-text-field {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  color: #0f1f11;
+  padding: 12px 8px;
+}
+
+.nk-text-field::placeholder {
+  color: rgba(64,73,61,0.5);
+}
+
+/* Orange mic / send button */
+.nk-mic-btn {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: none;
+  background-color: #ffb957; /* tertiary-fixed-dim */
+  color: #643f00; /* on-tertiary-fixed-variant */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(255,185,87,0.35);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.nk-mic-btn:active {
+  transform: scale(0.93);
+}
+
+.nk-mic-icon {
+  font-size: 28px;
+}
+
+/* Disclaimer */
+.nk-disclaimer {
+  margin: 10px 0 0;
+  font-size: 10px;
+  text-align: center;
+  color: rgba(64,73,61,0.6);
+}

@@ -1,0 +1,440 @@
+/* LearningScreen.css */
+
+.learning-screen-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+
+/* Page Title Area */
+.learning-title-area {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.learning-title {
+    font-family: var(--font-headline);
+    font-size: 1.875rem; /* 30px */
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+}
+
+.learning-subtitle {
+    font-family: var(--font-body);
+    color: var(--on-surface-variant);
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Progress & Streak Section */
+.progress-section {
+    background-color: var(--surface-container-low);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(15, 31, 17, 0.06);
+}
+
+.progress-bg-glow {
+    position: absolute;
+    right: -2.5rem;
+    top: -2.5rem;
+    width: 10rem;
+    height: 10rem;
+    background-color: var(--primary-container);
+    opacity: 0.1;
+    border-radius: 9999px;
+    filter: blur(24px);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+    z-index: 10;
+}
+
+.progress-title {
+    font-family: var(--font-headline);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin: 0;
+}
+
+.progress-subtitle {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--on-surface-variant);
+    margin-top: 0.25rem;
+}
+
+.streak-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--tertiary-fixed-dim);
+    background-color: rgba(152, 98, 0, 0.1);
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px;
+}
+
+.streak-icon {
+    font-size: 20px;
+    font-variation-settings: 'FILL' 1;
+}
+
+.streak-text {
+    font-family: var(--font-headline);
+    font-weight: 700;
+    font-size: 0.875rem;
+}
+
+.progress-bar-container {
+    width: 100%;
+    background-color: var(--surface-container-high);
+    border-radius: 9999px;
+    height: 0.75rem;
+    margin-top: 0.5rem;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+}
+
+.progress-bar-fill {
+    background: linear-gradient(to right, var(--primary), var(--primary-container));
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 1s ease-in-out;
+}
+
+.progress-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-family: var(--font-label);
+    color: var(--on-surface-variant);
+    position: relative;
+    z-index: 10;
+}
+
+.progress-percentage {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Featured Video Card */
+.featured-video-card {
+    position: relative;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    aspect-ratio: 16 / 9;
+    display: block;
+}
+
+.featured-video-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+}
+
+.featured-video-card:hover .featured-video-img {
+    transform: scale(1.05);
+}
+
+.featured-video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15, 31, 17, 0.9), rgba(15, 31, 17, 0.4), transparent);
+}
+
+.featured-video-lang {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
+
+.lang-badge {
+    background-color: var(--tertiary-fixed);
+    color: var(--on-tertiary-fixed);
+    font-size: 0.625rem; /* 10px */
+    font-family: var(--font-label);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.featured-video-play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-button-glass {
+    width: 4rem;
+    height: 4rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.featured-video-card:hover .play-button-glass {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.play-icon {
+    color: var(--on-primary);
+    font-size: 2.25rem;
+    font-variation-settings: 'FILL' 1;
+}
+
+.featured-video-info {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    color: var(--on-primary);
+}
+
+.featured-video-meta {
+    font-size: 0.75rem;
+    font-family: var(--font-label);
+    opacity: 0.8;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.featured-video-title {
+    font-family: var(--font-headline);
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0;
+}
+
+/* Course Library Grid */
+.course-library {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.course-library-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.course-library-title {
+    font-family: var(--font-headline);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin: 0;
+}
+
+.view-all-btn {
+    font-size: 0.875rem;
+    font-family: var(--font-label);
+    color: var(--primary);
+    font-weight: 600;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.course-card {
+    background-color: var(--surface-container-lowest);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.course-card-img-container {
+    aspect-ratio: 16 / 9;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--surface-container-low);
+}
+
+.course-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.course-card-level-container {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+}
+
+.course-card-level {
+    font-size: 0.625rem;
+    font-family: var(--font-label);
+    font-weight: 600;
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.level-beginner {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--on-surface);
+}
+
+.level-intermediate {
+    background-color: var(--primary-container);
+    color: var(--on-primary-container);
+}
+
+.level-advanced {
+    background-color: var(--tertiary-fixed);
+    color: var(--on-tertiary-fixed);
+}
+
+.course-card-duration {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    background-color: rgba(15, 31, 17, 0.8);
+    color: var(--on-primary);
+    font-size: 0.625rem;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+}
+
+.course-card-content {
+    padding: 0.75rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.course-card-title {
+    font-family: var(--font-headline);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    line-height: 1.25;
+    margin: 0;
+    margin-bottom: 0.5rem;
+}
+
+.course-card-views {
+    font-size: 0.6875rem; /* 11px */
+    font-family: var(--font-body);
+    color: var(--on-surface-variant);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin: 0;
+}
+
+.view-icon {
+    font-size: 0.875rem; /* 14px */
+}
+
+/* Language Selector */
+.language-selector {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    background-color: var(--surface-container-low);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.language-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.lang-icon {
+    color: var(--primary);
+}
+
+.lang-title {
+    font-family: var(--font-headline);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin: 0;
+}
+
+.lang-desc {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    margin: 0;
+}
+
+.change-lang-btn {
+    background-color: var(--surface-container-lowest);
+    color: var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-family: var(--font-label);
+    font-weight: 700;
+    border: 1px solid rgba(191, 202, 186, 0.3);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.change-lang-btn:hover {
+    background-color: var(--surface-container-high);
+}
+
+@media (min-width: 768px) {
+    .featured-video-card {
+        aspect-ratio: 21 / 9;
+    }
+    .featured-video-title {
+        font-size: 1.5rem;
+    }
+    .course-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

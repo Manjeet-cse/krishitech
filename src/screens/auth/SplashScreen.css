@@ -1,0 +1,134 @@
+/* ═══════════════════════════════════════════
+   SPLASH SCREEN
+   ═══════════════════════════════════════════ */
+
+.splash-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: #2e7d32;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.splash-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  width: 100%;
+  padding: 0 24px;
+}
+
+.splash-icon-container {
+  margin-bottom: 32px;
+  padding: 24px;
+  background-color: #0d631b;
+  border-radius: 9999px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(136, 217, 130, 0.2);
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+}
+
+.splash-icon-gradient {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: linear-gradient(to bottom right, rgba(255,255,255,0.1), transparent);
+}
+
+.splash-text-container {
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.splash-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: white;
+  filter: drop-shadow(0 4px 3px rgba(0,0,0,0.07));
+  margin-bottom: 12px;
+}
+
+.splash-subtitle {
+  font-size: 14px;
+  font-style: italic;
+  color: #88d982;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+}
+
+.splash-footer {
+  position: absolute;
+  bottom: 64px;
+  width: 100%;
+  padding: 0 48px;
+  z-index: 10;
+}
+
+.splash-loader-bar {
+  height: 4px;
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 9999px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+.splash-loader-progress {
+  height: 100%;
+  background-color: white;
+  border-radius: 9999px;
+  width: 0%;
+  animation: splash-load 2s ease-in-out forwards;
+}
+
+@keyframes splash-load {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+.splash-loader-text {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 12px;
+  color: rgba(255,255,255,0.6);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.splash-blob-1 {
+  position: absolute;
+  top: -128px;
+  right: -128px;
+  width: 384px;
+  height: 384px;
+  background-color: #0d631b;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.6;
+}
+
+.splash-blob-2 {
+  position: absolute;
+  bottom: -128px;
+  left: -128px;
+  width: 384px;
+  height: 384px;
+  background-color: #91f78e;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.2;
+}

@@ -1,0 +1,247 @@
+.screen-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--surface-light);
+}
+
+.home-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pb-nav {
+  padding-bottom: 16px;
+}
+
+/* Weather Widget */
+.weather-widget {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  cursor: pointer;
+}
+
+.weather-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.weather-left h3 {
+  font-size: 16px;
+  color: var(--neutral-dark);
+}
+
+.weather-left p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.weather-right {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.weather-stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Quick Actions */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.qa-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.qa-icon-box {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.qa-icon-box.bg-green { background-color: var(--surface-light); }
+.qa-icon-box.bg-orange { background-color: #FFF3E0; }
+.qa-icon-box.bg-blue { background-color: #E3F2FD; }
+.qa-icon-box.bg-grey { background-color: #F5F5F5; }
+
+.qa-card p {
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--neutral-dark);
+}
+
+/* Alert Card */
+.alert-card {
+  padding: 16px;
+  border-color: rgba(211, 47, 47, 0.3);
+  background-color: #FFEBEE;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.border-error {
+  border: 1px solid rgba(211, 47, 47, 0.5);
+}
+
+.alert-badge {
+  background-color: var(--error);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.alert-card p {
+  font-size: 13px;
+  color: var(--neutral-dark);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Section Headers */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.section-header h3 {
+  font-size: 18px;
+  color: var(--neutral-dark);
+}
+
+.section-header button {
+  display: flex;
+  align-items: center;
+}
+
+/* Crop Management Card */
+.crop-mgmt-card {
+  overflow: hidden;
+}
+
+.bg-img-crop {
+  height: 100px;
+  background-color: var(--primary);
+  background-image: linear-gradient(rgba(46, 125, 50, 0.5), rgba(46, 125, 50, 0.5)), url('https://images.unsplash.com/photo-1599839619722-39751411ea63?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center;
+}
+
+.crop-info {
+  padding: 16px;
+}
+
+.crop-info h4 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.crop-info p {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  background-color: var(--surface-light);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--primary);
+  border-radius: 3px;
+}
+
+.progress-container span {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.btn-outline-primary {
+  background-color: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  border-radius: 20px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Mandi Teaser */
+.mandi-teaser {
+  padding: 16px;
+}
+
+.mandi-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mandi-row h4 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.mandi-row p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.price-up {
+  text-align: right;
+}
+
+.price-up h4 {
+  color: var(--neutral-dark);
+}
+
+.price-up p {
+  color: var(--primary);
+  font-weight: 600;
+}

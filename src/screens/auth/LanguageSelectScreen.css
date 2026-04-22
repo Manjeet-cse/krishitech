@@ -1,0 +1,173 @@
+/* ═══════════════════════════════════════════
+   LANGUAGE SELECT SCREEN
+   ═══════════════════════════════════════════ */
+
+.lang-screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #ebffe7;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.lang-screen::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Top Bar ──────────────────────────────── */
+.lang-topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px 12px;
+  flex-shrink: 0;
+}
+
+.lang-topbar-icon {
+  font-size: 28px;
+  color: #0d631b;
+}
+
+.lang-topbar-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #0d631b;
+  margin: 0;
+}
+
+/* ── Subtitle ─────────────────────────────── */
+.lang-subtitle {
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #40493d;
+  margin: 0;
+  padding: 12px 48px 28px;
+  max-width: 320px;
+  align-self: center;
+}
+
+/* ── Language Grid ────────────────────────── */
+.lang-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 0 24px;
+  flex: 1;
+  align-content: start;
+}
+
+/* ── Language Tile (default) ──────────────── */
+.lang-tile {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+
+  /* Default: white surface */
+  background-color: #ffffff;
+  color: #0f1f11;
+  border: 2px solid rgba(191, 202, 186, 0.35);
+}
+
+.lang-tile:hover:not(.active) {
+  background-color: #e5f9e2;
+}
+
+.lang-tile:active {
+  transform: scale(0.95);
+}
+
+/* ── Tile — selected state ────────────────── */
+.lang-tile.active {
+  background: linear-gradient(to bottom, #0d631b, #2e7d32);
+  color: #ffffff;
+  border-color: #0d631b;
+  box-shadow: 0 6px 16px -4px rgba(13, 99, 27, 0.3);
+}
+
+.lang-tile.active .lang-tile-native {
+  color: #ffffff;
+}
+
+.lang-tile.active .lang-tile-label {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ── Tile text ────────────────────────────── */
+.lang-tile-native {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  z-index: 1;
+  color: #0f1f11;
+}
+
+.lang-tile-label {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 10px;
+  z-index: 1;
+  color: #40493d;
+}
+
+/* ── Check badge ──────────────────────────── */
+.lang-tile-check {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 18px;
+  color: #ffffff;
+  z-index: 2;
+}
+
+/* ── Bottom CTA ───────────────────────────── */
+.lang-bottom-cta {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px 24px 32px;
+  padding-top: 40px;
+  background: linear-gradient(to top, #ebffe7 60%, transparent);
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.lang-continue-btn {
+  width: 100%;
+  height: 56px;
+  border-radius: 28px;
+  background: linear-gradient(to bottom, #0d631b, #2e7d32);
+  color: #ffffff;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(15, 31, 17, 0.15);
+  transition: transform 0.15s ease;
+}
+
+.lang-continue-btn:active {
+  transform: scale(0.95);
+}

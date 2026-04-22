@@ -1,0 +1,69 @@
+.weather-hero-card {
+  background-color: var(--bg-inner);
+  border-radius: 24px;
+  padding: 32px 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.temp-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.temp-huge {
+  font-size: 64px;
+  font-weight: 800;
+  color: var(--neutral-dark);
+  line-height: 1;
+}
+
+.unit {
+  font-size: 32px;
+  vertical-align: top;
+}
+
+.weather-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.weather-stat-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--surface-light);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.w-12 { width: 48px; }
+.flex { display: flex; }
+.justify-center { justify-content: center; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+
+.forecast-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.forecast-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.forecast-row:last-child {
+  border-bottom: none;
+}
