@@ -1,17 +1,45 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Leaf, EyeOff, MessageSquare, ChevronDown } from 'lucide-react';
+import { Leaf, EyeOff, MessageSquare, ChevronDown, CheckCircle2 } from 'lucide-react';
 import './LoginScreen.css';
 
 export default function LoginScreen() {
   const navigate = useNavigate();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [pin, setPin] = useState('');
+  const [otpMode, setOtpMode] = useState(false);
+  const [otp, setOtp] = useState('');
+  const [otpSent, setOtpSent] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const newErrors = {};
+    if (!/^\d{10}$/.test(phoneNumber)) {
+      newErrors.phoneNumber = 'Enter a valid 10-digit mobile number';
+    }
+    if (!otpMode) {
+      if (pin.length < 4) {
+        newErrors.pin = 'Enter a valid PIN or password';
+      }
+    } else if (otpSent) {
+      if (!/^\d{6}$/.test(otp)) {
+        newErrors.otp = 'Enter valid 6-digit OTP';
+      }
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (phoneNumber && pin) {
-      navigate('/farmer/home');
+    if (validate()) {
+      if (otpMode && !otpSent) {
+        // Simulate sending OTP
+        setOtpSent(true);
+      } else {
+        // Success login
+        navigate('/farmer/home');
+      }
     }
   };
 
@@ -31,10 +59,10 @@ export default function LoginScreen() {
       {/* Form Card */}
       <div className="login-form-card">
         <h1>Welcome Back!</h1>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin} noValidate>
           
           {/* Mobile Number Field */}
-          <div className="login-input-group">
+          <div className="login-input-group" style={{ marginBottom: errors.phoneNumber ? '0.5rem' : '1.5rem' }}>
             <label className="login-input-label">Mobile Number</label>
             <div className="login-input-field-wrapper">
               <div className="login-input-prefix">
@@ -42,34 +70,66 @@ export default function LoginScreen() {
                 <ChevronDown size={16} />
               </div>
               <input 
-                className="login-input-field with-prefix" 
-                placeholder="Enter your number" 
+                className={`login-input-field with-prefix ${errors.phoneNumber ? 'error-border' : ''}`} 
+                placeholder="Enter your 10-digit number" 
                 type="tel"
                 value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
+                onChange={(e) => {
+                  setPhoneNumber(e.target.value.replace(/\D/g, '').slice(0, 10));
+                  if (errors.phoneNumber) setErrors({ ...errors, phoneNumber: null });
+                }}
               />
+              {phoneNumber.length === 10 && !errors.phoneNumber && (
+                <CheckCircle2 size={20} color="var(--success)" className="login-input-icon-right" />
+              )}
             </div>
+            {errors.phoneNumber && <p style={{ color: 'var(--error, #e53e3e)', fontSize: '0.875rem', marginTop: '0.25rem', fontFamily: 'var(--font-body)' }}>{errors.phoneNumber}</p>}
           </div>
 
-          {/* Password/PIN Field */}
-          <div className="login-input-group mb-2">
-            <label className="login-input-label">Password / PIN</label>
-            <div className="login-input-field-wrapper">
-              <input 
-                className="login-input-field" 
-                placeholder="Enter PIN" 
-                type="password"
-                value={pin}
-                onChange={(e) => setPin(e.target.value)}
-              />
-              <EyeOff size={20} className="login-input-icon-right" />
+          {!otpMode ? (
+            /* Password/PIN Field */
+            <div className="login-input-group mb-2">
+              <label className="login-input-label">Password / PIN</label>
+              <div className="login-input-field-wrapper">
+                <input 
+                  className={`login-input-field ${errors.pin ? 'error-border' : ''}`} 
+                  placeholder="Enter PIN" 
+                  type="password"
+                  value={pin}
+                  onChange={(e) => {
+                    setPin(e.target.value);
+                    if (errors.pin) setErrors({ ...errors, pin: null });
+                  }}
+                />
+                <EyeOff size={20} className="login-input-icon-right" />
+              </div>
+              {errors.pin && <p style={{ color: 'var(--error, #e53e3e)', fontSize: '0.875rem', marginTop: '0.25rem', fontFamily: 'var(--font-body)' }}>{errors.pin}</p>}
+              <a className="login-forgot-link" href="#" onClick={(e) => { e.preventDefault(); alert('Redirecting to reset PIN flow...'); }}>Forgot PIN?</a>
             </div>
-            <a className="login-forgot-link" href="#">Forgot PIN?</a>
-          </div>
+          ) : otpSent && (
+            /* OTP Field */
+            <div className="login-input-group mb-2">
+              <label className="login-input-label">Enter OTP</label>
+              <div className="login-input-field-wrapper">
+                <input 
+                  className={`login-input-field ${errors.otp ? 'error-border' : ''}`} 
+                  placeholder="6-digit OTP" 
+                  type="text"
+                  maxLength={6}
+                  value={otp}
+                  onChange={(e) => {
+                    setOtp(e.target.value.replace(/\D/g, ''));
+                    if (errors.otp) setErrors({ ...errors, otp: null });
+                  }}
+                />
+              </div>
+              {errors.otp && <p style={{ color: 'var(--error, #e53e3e)', fontSize: '0.875rem', marginTop: '0.25rem', fontFamily: 'var(--font-body)' }}>{errors.otp}</p>}
+            </div>
+          )}
 
           {/* Login Button */}
           <button className="login-btn-primary" type="submit">
-            Log In
+            {otpMode && !otpSent ? 'Send OTP' : 'Log In'}
           </button>
 
           {/* Divider */}
@@ -77,9 +137,13 @@ export default function LoginScreen() {
 
           {/* Alternative Login Buttons */}
           <div className="login-alt-buttons">
-            <button className="login-btn-ghost" type="button">
+            <button className="login-btn-ghost" type="button" onClick={() => {
+              setOtpMode(!otpMode);
+              setOtpSent(false);
+              setErrors({});
+            }}>
               <MessageSquare size={20} />
-              OTP Login
+              {otpMode ? 'Use Password / PIN' : 'OTP Login'}
             </button>
             <button className="login-btn-ghost" type="button">
               <svg style={{ width: '20px', height: '20px' }} fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

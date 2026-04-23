@@ -162,32 +162,48 @@ export default function Home() {
           {/* SECTION 4: Government Schemes */}
           <section className="schemes-section">
             <h2 className="home-section-title" style={{ marginBottom: '16px' }}>Govt Schemes</h2>
-            <div className="schemes-list">
-              <div className="scheme-card" onClick={() => navigate('/farmer/subsidy')}>
-                <div className="scheme-icon-box primary">
-                  <span className="material-symbols-outlined">account_balance_wallet</span>
+            <div 
+              className="schemes-group-card" 
+              onClick={() => navigate('/farmer/mandi')}
+              style={{
+                backgroundColor: 'white',
+                borderRadius: '16px',
+                padding: '16px',
+                boxShadow: 'var(--shadow-sm)',
+                border: '1px solid var(--border)',
+                cursor: 'pointer'
+              }}
+            >
+              <div className="schemes-list" style={{ gap: '12px' }}>
+                <div className="scheme-card" style={{ boxShadow: 'none', border: '1px solid var(--border)', padding: '12px' }}>
+                  <div className="scheme-icon-box primary">
+                    <span className="material-symbols-outlined">account_balance_wallet</span>
+                  </div>
+                  <div className="scheme-info">
+                    <h3 className="scheme-title">PM-KISAN Samman Nidhi</h3>
+                    <p className="scheme-value secondary">₹6,000/year</p>
+                  </div>
+                  <span className="scheme-badge deadline">Deadline: 31 Mar</span>
                 </div>
-                <div className="scheme-info">
-                  <h3 className="scheme-title">PM-KISAN Samman Nidhi</h3>
-                  <p className="scheme-value secondary">₹6,000/year</p>
+                <div className="scheme-card" style={{ boxShadow: 'none', border: '1px solid var(--border)', padding: '12px' }}>
+                  <div className="scheme-icon-box tertiary">
+                    <span className="material-symbols-outlined">shield_with_heart</span>
+                  </div>
+                  <div className="scheme-info">
+                    <h3 className="scheme-title">PM Fasal Bima Yojana</h3>
+                    <p className="scheme-value tertiary-container">Coverage: ₹2,00,000</p>
+                  </div>
+                  <span className="material-symbols-outlined scheme-verified">verified</span>
                 </div>
-                <span className="scheme-badge deadline">Deadline: 31 Mar</span>
               </div>
-              <div className="scheme-card" onClick={() => navigate('/farmer/subsidy')}>
-                <div className="scheme-icon-box tertiary">
-                  <span className="material-symbols-outlined">shield_with_heart</span>
-                </div>
-                <div className="scheme-info">
-                  <h3 className="scheme-title">PM Fasal Bima Yojana</h3>
-                  <p className="scheme-value tertiary-container">Coverage: ₹2,00,000</p>
-                </div>
-                <span className="material-symbols-outlined scheme-verified">verified</span>
+              <div style={{ textAlign: 'center', marginTop: '12px', color: 'var(--primary)', fontWeight: '600', fontSize: '14px', fontFamily: 'var(--font-headline)' }}>
+                View More <span className="material-symbols-outlined" style={{ fontSize: '16px', verticalAlign: 'middle' }}>arrow_forward</span>
               </div>
             </div>
           </section>
 
           {/* SECTION 5: AI Farming Tip */}
-          <section className="ai-tip-card">
+          <section className="ai-tip-card" onClick={() => navigate('/farmer/ai-assistant')} style={{ cursor: 'pointer' }}>
             <div className="ai-tip-header">
               <span className="material-symbols-outlined" style={{ color: 'var(--tertiary)', fontVariationSettings: "'FILL' 1" }}>smart_toy</span>
               <h2 className="ai-tip-title">AI Tip for Today</h2>
@@ -195,14 +211,14 @@ export default function Home() {
             <p className="ai-tip-text">
               Apply DAP fertilizer to Wheat within the next 48 hours for optimal tiller development. The current soil moisture at 18% is ideal for absorption.
             </p>
-            <button className="ai-tip-action">
+            <button className="ai-tip-action" onClick={(e) => { e.stopPropagation(); navigate('/farmer/ai-assistant'); }}>
               Ask AI for more tips
               <span className="material-symbols-outlined">arrow_forward</span>
             </button>
           </section>
 
           {/* SECTION 6: Mandi Updates Teaser */}
-          <section className="mandi-card" onClick={() => navigate('/farmer/mandi')}>
+          <section className="mandi-card" onClick={() => navigate('/farmer/mandi')} style={{ cursor: 'pointer' }}>
             <div className="mandi-header">
               <h2 className="mandi-title">Mandi Updates</h2>
               <span className="mandi-subtitle">Ludhiana Market</span>
@@ -229,6 +245,9 @@ export default function Home() {
                   <span className="material-symbols-outlined" style={{ fontSize: '12px' }}>trending_up</span>
                 </div>
               </div>
+            </div>
+            <div style={{ textAlign: 'center', marginTop: '16px', color: 'var(--primary)', fontWeight: '600', fontSize: '14px', fontFamily: 'var(--font-headline)' }}>
+              View More <span className="material-symbols-outlined" style={{ fontSize: '16px', verticalAlign: 'middle' }}>arrow_forward</span>
             </div>
           </section>
         </div>
